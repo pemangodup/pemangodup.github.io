@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <style type="text/css">
+        .allignment{
+            text-align: center;
+        }
+        .textColor{
+            color: white;
+        }
+    </style>
+</head>
+<body style="background-color: green" id="allignment">
+<div class="loading" id="load">
+    Loading.....
+</div>
+<div class="allignment" id="allign" hidden>
+    <img height="200" width="200" id="profileImage">
+    <h2 id="name" style="color: white">Pema Ngodup</h2>
+    <h5 id="followers" style="color: white">Number of followers are </h5>
+    <p style="color: white">
+        Check me on <a id="gitLink"> github</a>.
+    </p>
+    <a class="twitter-timeline" data-width="300" data-height="400" href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+
+<script type="text/javascript">
+    fetch("https://api.github.com/users/pemangodup")
+        .then(response => response.json())
+        .then(function(data){
+
+            let followersCount = data['followers']
+            let followersInfo = `I have got ${followersCount} no of followers`
+            document.getElementById('profileImage').src= data["avatar_url"]
+            document.getElementById("name").textContent = data["name"]
+            document.getElementById("followers").textContent = followersInfo
+            document.getElementById("gitLink").href = data["html_url"]
+            document.getElementById("load").hidden = true
+
+            document.getElementById("allign").hidden = false
+        })
+</script>
+</body>
+</html>
